@@ -3,7 +3,7 @@ from flask import Flask, request
 from nltk.corpus import stopwords
 import requests
 import nltk
-
+nltk.download("stopwords")
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
