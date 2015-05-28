@@ -1,23 +1,35 @@
+import zipfile
 from flask import Flask, request
+from nltk.corpus import stopwords
 import requests
+import nltk
 
 app = Flask(__name__)
-
 
 @app.route('/', methods=['GET', 'POST'])
 def hello_world():
     if request.method == 'POST':
-        print request.files
-        print request.data
-        print request.form
-        print request
-        req = requests.post(request.form["url"], data={"mark": 100})
-        print req
-        with open('fail.html', 'w') as file_:
-            file_.write(req.content)
+        archive = zipfile.ZipFile(request.files.get("solution"))
+        with archive.open("extra.txt") as solution:
+            languages_ratios = {}
+            tokens = nltk.wordpunct_tokenize(solution.read().decode('utf-8'))
+            words_set = set([word.lower() for word in tokens])
+            for language in stopwords.fileids():
+                stopwords_set = set(stopwords.words(language))
+                common_elements = words_set.intersection(stopwords_set)
+                if common_elements:
+                    languages_ratios[language] = len(common_elements)
 
-    return 'Hello World!'
+            # 50%
+            mark = (float(languages_ratios['english']) / sum(languages_ratios.values())) * 50
 
+            # 50%
+            words_count = len(words_set)
+            mark += (words_count / 500) * 50 if words_count < 500 else 50
+
+        req = requests.post(request.form["url"], data={"mark": int(mark)})
+
+    return ''
 
 if __name__ == '__main__':
     app.run(debug=True)
