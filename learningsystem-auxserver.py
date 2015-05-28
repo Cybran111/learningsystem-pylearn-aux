@@ -28,9 +28,11 @@ def hello_world():
             # 50%
             mark = 50 if max(languages_ratios, key=languages_ratios.get) == 'english' else 0
             # 50%
+            print "Mark for lang: ", mark
             words_count = len(words_set)
-            mark += (words_count / 200) * 50 if words_count < 200 else 50
-            print "Mark: ", mark
+            print "Words count: ", words_count
+            mark += (float(words_count) / 200) * 50 if words_count < 200 else 50
+            print "Total Mark: ", mark
 
         req = requests.post(request.form["url"], data={"mark": int(mark)})
 
