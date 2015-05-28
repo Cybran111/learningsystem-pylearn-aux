@@ -25,7 +25,7 @@ def hello_world():
 
             # 50%
             words_count = len(words_set)
-            mark += (words_count / 500) * 50 if words_count < 500 else 50
+            mark += (words_count / 200) * 50 if words_count < 200 else 50
 
         req = requests.post(request.form["url"], data={"mark": int(mark)})
 
