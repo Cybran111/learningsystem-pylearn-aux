@@ -26,8 +26,7 @@ def hello_world():
 
             print "Language ratios: ", languages_ratios
             # 50%
-            mark = (float(languages_ratios['english']) / sum(languages_ratios.values())) * 50
-
+            mark = 50 if max(languages_ratios, key=languages_ratios.get) == 'english' else 0
             # 50%
             words_count = len(words_set)
             mark += (words_count / 200) * 50 if words_count < 200 else 50
