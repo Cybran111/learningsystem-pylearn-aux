@@ -6,18 +6,18 @@ import requests
 app = Flask(__name__)
 
 CODE_DICT = {
-    1: "print('привіт, світ')",
-    2: "a=float(input())"
-    "b=float(input())"
-    "if a<b:"
-    "    print('<')"
-    "elif a>b:"
-    "    print('>')"
-    "else:"
-    "    print('=')",
-    3: "word=input()"
-    "for letter in word"
-    "    print(letter)"
+    1: u"print('привіт, світ')",
+    2: u"a=float(input())"
+    u"b=float(input())"
+    u"if a<b:"
+    u"    print('<')"
+    u"elif a>b:"
+    u"    print('>')"
+    u"else:"
+    u"    print('=')",
+    3: u"word=input()"
+    u"for letter in word"
+    u"    print(letter)"
 
 }
 
@@ -34,8 +34,13 @@ def first(assign_id):
         mark = 0.0
         with archive.open("learn.py") as solution:
             for s in code:
+                sol = solution.read(1)
                 print s
-                if s == solution.read(1):
+                print sol
+                print mark
+                print
+
+                if s == sol:
                     mark += step
                     print mark
         req = requests.post(request.form["url"], data={"mark": int(mark)})
