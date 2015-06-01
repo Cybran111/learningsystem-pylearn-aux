@@ -6,18 +6,18 @@ import requests
 app = Flask(__name__)
 
 CODE_DICT = {
-    1: u"print('привіт, світ')",
-    2: u"a=float(input())"
-    u"b=float(input())"
-    u"if a<b:"
-    u"    print('<')"
-    u"elif a>b:"
-    u"    print('>')"
-    u"else:"
-    u"    print('=')",
-    3: u"word=input()"
-    u"for letter in word"
-    u"    print(letter)"
+    1: "print('привіт, світ')",
+    2: "a=float(input())"
+    "b=float(input())"
+    "if a<b:"
+    "    print('<')"
+    "elif a>b:"
+    "    print('>')"
+    "else:"
+    "    print('=')",
+    3: "word=input()"
+    "for letter in word"
+    "    print(letter)"
 
 }
 
@@ -30,19 +30,24 @@ def first(assign_id):
         archive = zipfile.ZipFile(request.files.get("solution"))
         code = CODE_DICT[assign_id]
         print code
-        step = 1.0 / len(code)
+        step = (100.0 / len(code))
         mark = 0.0
         with archive.open("learn.py") as solution:
             for s in code:
                 sol = solution.read(1)
-                print s
-                print sol
-                print mark
-                print
+                # print s
+                # print sol
 
                 if s == sol:
                     mark += step
                     print mark
+                # print mark
+                # print
+        print mark
+        print mark == 100.0
+        print 99.9 < mark
+        print 100.1 > mark
+
         req = requests.post(request.form["url"], data={"mark": int(mark)})
     return ''
 
