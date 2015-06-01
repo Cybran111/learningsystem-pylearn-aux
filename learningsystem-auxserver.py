@@ -32,7 +32,7 @@ def first(assign_id):
         print code
         step = 1.0 / len(code)
         mark = 0.0
-        with archive.open("hello.py") as solution:
+        with archive.open("learn.py") as solution:
             for s in code:
                 print s
                 if s == solution.read(1):
