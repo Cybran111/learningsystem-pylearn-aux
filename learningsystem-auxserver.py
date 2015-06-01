@@ -35,20 +35,11 @@ def first(assign_id):
         with archive.open("learn.py") as solution:
             for s in code:
                 sol = solution.read(1)
-                # print s
-                # print sol
 
                 if s == sol:
                     mark += step
-                    print mark
-                # print mark
-                # print
-        print mark
-        print mark == 100.0
-        print 99.9 < mark
-        print 100.1 > mark
 
-        req = requests.post(request.form["url"], data={"mark": int(mark)})
+        req = requests.post(request.form["url"], data={"mark": 100 if mark > 99.9 else int(mark)})
     return ''
 
 if __name__ == '__main__':
