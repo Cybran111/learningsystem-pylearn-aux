@@ -38,6 +38,9 @@ def first(assign_id):
 
                 if s == sol:
                     mark += step
+                print s
+                print sol
+                print mark
 
         req = requests.post(request.form["url"], data={"mark": 100 if mark > 99.9 else int(mark)})
     return ''
